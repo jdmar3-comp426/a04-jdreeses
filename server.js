@@ -31,7 +31,7 @@ app.get("/app/", (req, res, next) => {
 app.post('/app/new/', (req, res) => {
 	const stnt = db.prepare("INSERT INTO userinfo (user, pass) VALUES (?, ?)");
 	const info = stnt.run(req.body.user, md5(req.body.pass));
-	res.status(201).json({"message": info.changes+ " record created: ID " +info.lastInsertRowid+ " (201)"});
+	res.status(201).json({"message": "1 record created: ID " +info.lastInsertRowid+ " (201)"});
 }
 
 );
@@ -59,8 +59,9 @@ app.patch("/app/update/user/:id", (req, res) => {
 app.delete("/app/delete/user/:id", (req, res) => {
 	const stmt = db.prepare("DELETE FROM userinfo WHERE id = ?");
 	const result = stmt.run(req.params.id);
-	res.status(204).json({"message": "1 record deleted: ID 2 (200)"});
+	res.status(200).json({"message": "1 record deleted: ID 2 (200)"});
 });
+
 // Default response for any other request
 app.use(function(req, res){
 	res.json({"message":"Endpoint not found. (404)"});
